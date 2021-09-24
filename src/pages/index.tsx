@@ -66,42 +66,64 @@ const IndexPage: React.FC = () => {
   );
 
   return (
-    <main className="mt-20 px-10 md:px-0">
-      <h1 className="text-center text-4xl font-bold">Link shortener</h1>
+    <main className="pt-20 px-10 md:px-0 flex flex-col justify-between h-screen">
+      <div>
+        <h1 className="text-center text-4xl font-bold mb-2">Link Shortener</h1>
+        <p className="text-center text-gray-500">It shortens your links. That&apos;s it 🙃</p>
 
-      <div className="flex items-center w-full mt-10">
-        <div className="w-full md:max-w-2xl md:mx-auto">
-          {error && <Alert type="error" title="Error" message={error} />}
+        <div className="flex items-center w-full mt-10">
+          <div className="w-full md:max-w-2xl md:mx-auto">
+            {error && <Alert type="error" title="Error" message={error} />}
 
-          {shorterUrl && (
-            <Alert type="success" title="Success" CustomMessage={renderSuccessAlertMessage} />
-          )}
+            {shorterUrl && (
+              <Alert type="success" title="Success" CustomMessage={renderSuccessAlertMessage} />
+            )}
 
-          <form className="mb-4 md:flex md:flex-wrap md:justify-between">
-            <div className="flex flex-col mb-4 md:w-3/4">
-              <input
-                type="text"
-                name="url"
-                placeholder="Type your URL here..."
-                onChange={(e) => setUrl(e.target.value)}
-                disabled={isLoading}
-                className="bg-white md:mr-5 p-4 shadow rounded-lg focus:outline-none focus:ring focus:border-blue-700"
-              />
-            </div>
+            <form className="md:flex md:flex-wrap md:justify-between">
+              <div className="flex flex-col mb-4 md:w-3/4">
+                <input
+                  type="text"
+                  name="url"
+                  placeholder="Type your URL here..."
+                  onChange={(e) => setUrl(e.target.value)}
+                  disabled={isLoading}
+                  className="bg-white md:mr-5 p-4 shadow rounded-lg focus:outline-none focus:ring focus:border-blue-700"
+                />
+              </div>
 
-            <div className="flex flex-col mb-4 md:w-1/4">
-              <button
-                type="button"
-                onClick={(e) => (!isLoading ? onSubmitPress(e) : null)}
-                disabled={isLoading}
-                className="p-4 rounded-lg bg-blue-500 hover:bg-blue-700 text-white transition-colors"
-              >
-                Make it short!
-              </button>
-            </div>
-          </form>
+              <div className="flex flex-col mb-4 md:w-1/4">
+                <button
+                  type="button"
+                  onClick={(e) => (!isLoading ? onSubmitPress(e) : null)}
+                  disabled={isLoading}
+                  className="p-4 rounded-lg bg-blue-500 hover:bg-blue-700 text-white transition-colors"
+                >
+                  Make it short!
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
+
+      <p className="mb-5 text-gray-400 text-center text-xs">
+        Created with{' '}
+        <a href="https://nextjs.org/" target="_blank" rel="noreferrer" className="underline">
+          Next.js
+        </a>
+        ,{' '}
+        <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer" className="underline">
+          Tailwind
+        </a>{' '}
+        and{' '}
+        <a href="https://upstash.com/" target="_blank" rel="noreferrer" className="underline">
+          Upstash
+        </a>{' '}
+        by{' '}
+        <a href="https://matheus.me" target="_blank" rel="noreferrer" className="underline">
+          Matheus Calegaro
+        </a>
+      </p>
     </main>
   );
 };
