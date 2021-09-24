@@ -1,8 +1,11 @@
 import { useState, MouseEvent } from 'react';
 
+import { UrlService } from '../services';
+
 const IndexPage: React.FC = () => {
   const [url, setUrl] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
+  const [shorterUrl, setShorterUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const onSubmitPress = async (e: MouseEvent<HTMLElement>): Promise<void> => {
@@ -17,11 +20,11 @@ const IndexPage: React.FC = () => {
       return;
     }
 
-    setIsLoading(false);
+    setIsLoading(true);
 
-    // FIXME: move this to its own service
     try {
-      // TODO: call API route
+      const response = await UrlService.shorten(url);
+      setShorterUrl(response);
     } catch (err) {
       console.error(err);
       setError(err.message);
@@ -37,6 +40,14 @@ const IndexPage: React.FC = () => {
       {error && (
         <div className="error">
           <p>{error}</p>
+        </div>
+      )}
+
+      {shorterUrl && (
+        <div className="success">
+          <p>
+            Your new URL is <strong>{shorterUrl}</strong>
+          </p>
         </div>
       )}
 
