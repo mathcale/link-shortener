@@ -2,22 +2,26 @@ import { randomBytes } from 'crypto';
 import Redis from 'ioredis';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
+import type { ErrorOutput, ShortenUrlInput, ShortenUrlOutput } from '../../typings';
 
 const db = new Redis(process.env.REDIS_URL);
 const exp = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g;
 
-const shorten = async (req: NextApiRequest, res: NextApiResponse) => {
+const shorten = async (
+  req: NextApiRequest,
+  res: NextApiResponse<ShortenUrlOutput | ErrorOutput>,
+) => {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { url } = req.body;
+  const { url }: ShortenUrlInput = req.body;
 
-  if (!url || url === '' || !exp.test(url)) {
-    return res.status(400).json({ message: 'Please provide a valid URL!' });
+  if (!url.match(exp)) {
+    return res.status(400).json({ error: 'Please provide a valid URL!' });
   }
 
-  const id = randomBytes(8).toString('hex');
+  const id = randomBytes(4).toString('hex');
   console.info(`Inserting new URL with id [${id}] on database...`);
 
   await db.set(id, url);
