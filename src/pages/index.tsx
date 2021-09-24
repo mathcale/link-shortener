@@ -10,7 +10,9 @@ const IndexPage: React.FC = () => {
 
   const onSubmitPress = async (e: MouseEvent<HTMLElement>): Promise<void> => {
     e.preventDefault();
+
     setError(null);
+    setShorterUrl(null);
 
     // FIXME: move validation to its own service
     const exp = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g;
@@ -60,7 +62,11 @@ const IndexPage: React.FC = () => {
           disabled={isLoading}
         />
 
-        <button type="button" onClick={!isLoading && onSubmitPress} disabled={isLoading}>
+        <button
+          type="button"
+          onClick={(e) => (!isLoading ? onSubmitPress(e) : null)}
+          disabled={isLoading}
+        >
           Make it short!
         </button>
       </form>
