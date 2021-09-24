@@ -54,7 +54,7 @@ const IndexPage: React.FC = () => {
 
   const renderSuccessAlertMessage = () => (
     <div>
-      <p>
+      <p className="break-all">
         Your new URL is{' '}
         <a href="#" onClick={onShortenedLinkClick} data-tip={tooltipText} className="font-bold">
           {shorterUrl}
@@ -66,7 +66,7 @@ const IndexPage: React.FC = () => {
   );
 
   return (
-    <main className="mt-20">
+    <main className="mt-20 px-10 md:px-0">
       <h1 className="text-center text-4xl font-bold">Link shortener</h1>
 
       <div className="flex items-center w-full mt-10">
