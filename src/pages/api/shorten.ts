@@ -16,6 +16,7 @@ const shorten = async (
   }
 
   const { url }: ShortenUrlInput = req.body;
+  const ip = req.headers['x-real-ip'] || '';
 
   if (!url.match(exp)) {
     return res.status(400).json({ error: 'Please provide a valid URL!' });
@@ -24,7 +25,12 @@ const shorten = async (
   const id = randomBytes(4).toString('hex');
   console.info(`Inserting new URL with id [${id}] on database...`);
 
-  await db.set(id, url);
+  const hashFields = new Map();
+  hashFields.set('url', url);
+  hashFields.set('ip', ip);
+  hashFields.set('createdAt', new Date().toISOString());
+
+  await db.hset(id, hashFields);
   console.info('URL successfully inserted on database!');
 
   return res.status(201).json({ shorterUrl: `${process.env.REDIRECT_BASE_URL}/${id}` });
