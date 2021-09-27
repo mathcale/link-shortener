@@ -7,11 +7,11 @@ interface AlertProps {
 
 const settings = {
   error: {
-    containerBgColor: 'red-200',
-    containerBorderColor: 'red-300',
-    iconBgColor: 'red-100',
-    iconBorderColor: 'red-500',
-    iconMainColor: 'red-500',
+    containerBgColor: 'bg-red-200',
+    containerBorderColor: 'border-red-300',
+    iconBgColor: 'bg-red-100',
+    iconBorderColor: 'border-red-500',
+    iconMainColor: 'text-red-500',
     icon: (
       <svg fill="currentColor" viewBox="0 0 20 20" className="h-6 w-6">
         <path
@@ -21,15 +21,15 @@ const settings = {
         ></path>
       </svg>
     ),
-    titleColor: 'red-800',
-    textColor: 'red-600',
+    titleColor: 'text-red-800',
+    textColor: 'text-red-600',
   },
   success: {
-    containerBgColor: 'green-200',
-    containerBorderColor: 'green-300',
-    iconBgColor: 'green-100',
-    iconBorderColor: 'green-500',
-    iconMainColor: 'green-500',
+    containerBgColor: 'bg-green-200',
+    containerBorderColor: 'border-green-300',
+    iconBgColor: 'bg-green-100',
+    iconBorderColor: 'border-green-500',
+    iconMainColor: 'text-green-500',
     icon: (
       <svg fill="currentColor" viewBox="0 0 20 20" className="h-6 w-6">
         <path
@@ -39,28 +39,28 @@ const settings = {
         ></path>
       </svg>
     ),
-    titleColor: 'green-800',
-    textColor: 'green-600',
+    titleColor: 'text-green-800',
+    textColor: 'text-green-600',
   },
 };
 
 export const Alert: React.FC<AlertProps> = ({ type, title, message, CustomMessage }) => {
   return (
     <div
-      className={`alert flex flex-row items-center w-full bg-${settings[type].containerBgColor} mb-5 p-5 rounded-lg border-b-2 border-${settings[type].containerBorderColor}`}
+      className={`alert flex flex-row items-center w-full ${settings[type].containerBgColor} mb-5 p-5 rounded-lg border-b-2 ${settings[type].containerBorderColor}`}
     >
       <div
-        className={`alert-icon flex items-center bg-${settings[type].iconBgColor} border-2 border-${settings[type].iconBorderColor} justify-center h-10 w-10 flex-shrink-0 rounded-full`}
+        className={`alert-icon flex items-center ${settings[type].iconBgColor} border-2 ${settings[type].iconBorderColor} justify-center h-10 w-10 flex-shrink-0 rounded-full`}
       >
-        <span className={`text-${settings[type].iconMainColor}`}>{settings[type].icon}</span>
+        <span className={`${settings[type].iconMainColor}`}>{settings[type].icon}</span>
       </div>
 
       <div className="alert-content ml-4">
-        <div className={`alert-title font-semibold text-lg text-${settings[type].titleColor}`}>
+        <div className={`alert-title font-semibold text-lg ${settings[type].titleColor}`}>
           {title}
         </div>
 
-        <div className={`alert-description text-sm text-${settings[type].textColor}`}>
+        <div className={`alert-description text-sm ${settings[type].textColor}`}>
           {message && <p>{message}</p>}
           {CustomMessage && <CustomMessage />}
         </div>
