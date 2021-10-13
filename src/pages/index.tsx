@@ -112,7 +112,7 @@ const IndexPage: React.FC = () => {
           </div>
         </div>
 
-        <p className="mb-5 text-gray-600 text-center text-xs">
+        <p className="mb-5 text-gray-600 text-center text-xs dark:text-gray-400">
           Created with{' '}
           <a href="https://nextjs.org/" target="_blank" rel="noreferrer" className="underline">
             Next.js
