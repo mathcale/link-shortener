@@ -7,9 +7,9 @@ interface AlertProps {
 
 const settings = {
   error: {
-    containerBgColor: 'bg-red-200',
-    containerBorderColor: 'border-red-300',
-    iconBgColor: 'bg-red-100',
+    containerBgColor: 'bg-red-200 dark:bg-red-900',
+    containerBorderColor: 'border-red-300 dark:border-red-500',
+    iconBgColor: 'bg-red-100 dark:bg-red-200',
     iconBorderColor: 'border-red-500',
     iconMainColor: 'text-red-500',
     icon: (
@@ -21,12 +21,12 @@ const settings = {
         ></path>
       </svg>
     ),
-    titleColor: 'text-red-800',
-    textColor: 'text-red-600',
+    titleColor: 'text-red-900 dark:text-white',
+    textColor: 'text-red-900 dark:text-red-300',
   },
   success: {
-    containerBgColor: 'bg-green-200',
-    containerBorderColor: 'border-green-300',
+    containerBgColor: 'bg-green-200 dark:bg-green-800',
+    containerBorderColor: 'border-green-300 dark:bg-green-600',
     iconBgColor: 'bg-green-100',
     iconBorderColor: 'border-green-500',
     iconMainColor: 'text-green-500',
@@ -39,8 +39,8 @@ const settings = {
         ></path>
       </svg>
     ),
-    titleColor: 'text-green-800',
-    textColor: 'text-green-600',
+    titleColor: 'text-green-900 dark:text-white',
+    textColor: 'text-green-900 dark:text-green-300',
   },
 };
 
