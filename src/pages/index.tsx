@@ -75,7 +75,7 @@ const IndexPage: React.FC = () => {
       <main className="pt-20 px-10 md:px-0 flex flex-col justify-between h-screen">
         <div>
           <h1 className="text-center text-4xl font-bold mb-2 dark:text-white">Link Shortener</h1>
-          <p className="text-center text-gray-500 dark:text-gray-400">It shortens your links. That&apos;s it 🙃</p>
+          <p className="text-center text-gray-600 dark:text-gray-400">It shortens your links. That&apos;s it 🙃</p>
 
           <div className="flex items-center w-full mt-10">
             <div className="w-full md:max-w-2xl md:mx-auto">
@@ -102,7 +102,7 @@ const IndexPage: React.FC = () => {
                     type="button"
                     onClick={(e) => (!isLoading ? onSubmitPress(e) : null)}
                     disabled={isLoading}
-                    className="p-4 rounded-lg bg-blue-500 hover:bg-blue-700 text-white transition-colors dark:bg-blue-800 dark:hover:bg-blue-600"
+                    className="p-4 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors dark:bg-blue-800 dark:hover:bg-blue-600"
                   >
                     Make it short!
                   </button>
@@ -112,7 +112,7 @@ const IndexPage: React.FC = () => {
           </div>
         </div>
 
-        <p className="mb-5 text-gray-400 text-center text-xs">
+        <p className="mb-5 text-gray-600 text-center text-xs">
           Created with{' '}
           <a href="https://nextjs.org/" target="_blank" rel="noreferrer" className="underline">
             Next.js

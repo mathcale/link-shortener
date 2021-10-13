@@ -21,8 +21,8 @@ const settings = {
         ></path>
       </svg>
     ),
-    titleColor: 'text-red-800 dark:text-white',
-    textColor: 'text-red-600 dark:text-red-300',
+    titleColor: 'text-red-900 dark:text-white',
+    textColor: 'text-red-900 dark:text-red-300',
   },
   success: {
     containerBgColor: 'bg-green-200 dark:bg-green-800',
@@ -39,8 +39,8 @@ const settings = {
         ></path>
       </svg>
     ),
-    titleColor: 'text-green-800 dark:text-white',
-    textColor: 'text-green-600 dark:text-green-300',
+    titleColor: 'text-green-900 dark:text-white',
+    textColor: 'text-green-900 dark:text-green-300',
   },
 };
 
