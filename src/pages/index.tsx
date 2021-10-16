@@ -7,7 +7,9 @@ import { UrlService } from "../services";
 import { Trans, useTranslation } from "react-i18next";
 
 const IndexPage: React.FC = () => {
-  const INITIAL_TOOLTIP_TEXT = "Copy to clipboard";
+  const { t } = useTranslation();
+
+  const INITIAL_TOOLTIP_TEXT = t("index.tooltips.copy");
 
   const [url, setUrl] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
@@ -15,8 +17,6 @@ const IndexPage: React.FC = () => {
 
   const [tooltipText, setTooltipText] = useState<string>(INITIAL_TOOLTIP_TEXT);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const { t } = useTranslation();
 
   const onSubmitPress = async (e: MouseEvent<HTMLElement>): Promise<void> => {
     e.preventDefault();
@@ -29,7 +29,7 @@ const IndexPage: React.FC = () => {
       /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g;
 
     if (url === "" || !exp.test(url)) {
-      setError("Invalid URL!");
+      setError(t("index.alerts.error.messages.invalidUrl"));
       return;
     }
 
@@ -50,7 +50,7 @@ const IndexPage: React.FC = () => {
     e.preventDefault();
 
     await navigator.clipboard.writeText(shorterUrl);
-    setTooltipText("Copied!");
+    setTooltipText(t("index.tooltips.copied"));
 
     setTimeout(() => {
       setTooltipText(INITIAL_TOOLTIP_TEXT);
@@ -60,15 +60,22 @@ const IndexPage: React.FC = () => {
   const renderSuccessAlertMessage = () => (
     <div>
       <p className="break-all">
-        Your new URL is{" "}
-        <a
-          href="#"
-          onClick={onShortenedLinkClick}
-          data-tip={tooltipText}
-          className="font-bold"
-        >
-          {shorterUrl}
-        </a>
+        <Trans
+          i18nKey="index.alerts.success.message"
+          values={{
+            shorterUrl,
+          }}
+          components={{
+            url: (
+              <a
+                href="#"
+                onClick={onShortenedLinkClick}
+                data-tip={tooltipText}
+                className="font-bold"
+              />
+            ),
+          }}
+        />
       </p>
 
       <ReactTooltip />
@@ -92,12 +99,18 @@ const IndexPage: React.FC = () => {
 
           <div className="flex items-center w-full mt-10">
             <div className="w-full md:max-w-2xl md:mx-auto">
-              {error && <Alert type="error" title="Error" message={error} />}
+              {error && (
+                <Alert
+                  type="error"
+                  title={t("index.alerts.error.title")}
+                  message={error}
+                />
+              )}
 
               {shorterUrl && (
                 <Alert
                   type="success"
-                  title="Success"
+                  title={t("index.alerts.success.title")}
                   CustomMessage={renderSuccessAlertMessage}
                 />
               )}

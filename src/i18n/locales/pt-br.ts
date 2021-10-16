@@ -4,6 +4,22 @@ const enUsTranslations = {
       head: {
         title: "MiniLinks - um simples encurtador de links por @mathcale",
       },
+      alerts: {
+        success: {
+          title: "Successo",
+          message: "Sua nova URL é <url>{{shorterUrl}}</url>",
+        },
+        error: {
+          title: "Erro",
+          messages: {
+            invalidUrl: "URL Inválida!",
+          },
+        },
+      },
+      tooltips: {
+        copy: "Copiar",
+        copied: "Copiado!",
+      },
       title: "Encurtador de Links",
       subtitle: "Ele encurta seus links. É isso 🙃",
       inputs: {
