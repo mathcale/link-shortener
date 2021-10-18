@@ -2,13 +2,16 @@ import { useState, MouseEvent } from 'react';
 import Head from 'next/head';
 import ReactTooltip from 'react-tooltip';
 
-import { Alert } from '../components';
-import { UrlService } from '../services';
+import { Alert } from "../components";
+import { UrlService } from "../services";
+import { Trans, useTranslation } from "react-i18next";
 
 const IndexPage: React.FC = () => {
-  const INITIAL_TOOLTIP_TEXT = 'Copy to clipboard';
+  const { t } = useTranslation();
 
-  const [url, setUrl] = useState<string>('');
+  const INITIAL_TOOLTIP_TEXT = t("index.tooltips.copy");
+
+  const [url, setUrl] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const [shorterUrl, setShorterUrl] = useState<string | null>(null);
 
@@ -22,10 +25,11 @@ const IndexPage: React.FC = () => {
     setShorterUrl(null);
 
     // FIXME: move validation to its own service
-    const exp = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g;
+    const exp =
+      /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g;
 
-    if (url === '' || !exp.test(url)) {
-      setError('Invalid URL!');
+    if (url === "" || !exp.test(url)) {
+      setError(t("index.alerts.error.messages.invalidUrl"));
       return;
     }
 
@@ -46,7 +50,7 @@ const IndexPage: React.FC = () => {
     e.preventDefault();
 
     await navigator.clipboard.writeText(shorterUrl);
-    setTooltipText('Copied!');
+    setTooltipText(t("index.tooltips.copied"));
 
     setTimeout(() => {
       setTooltipText(INITIAL_TOOLTIP_TEXT);
@@ -56,10 +60,22 @@ const IndexPage: React.FC = () => {
   const renderSuccessAlertMessage = () => (
     <div>
       <p className="break-all">
-        Your new URL is{' '}
-        <a href="#" onClick={onShortenedLinkClick} data-tip={tooltipText} className="font-bold">
-          {shorterUrl}
-        </a>
+        <Trans
+          i18nKey="index.alerts.success.message"
+          values={{
+            shorterUrl,
+          }}
+          components={{
+            url: (
+              <a
+                href="#"
+                onClick={onShortenedLinkClick}
+                data-tip={tooltipText}
+                className="font-bold"
+              />
+            ),
+          }}
+        />
       </p>
 
       <ReactTooltip />
@@ -69,20 +85,34 @@ const IndexPage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>MiniLinks - a simple link shortener by @mathcale</title>
+        <title>{t("index.head.title")}</title>
       </Head>
 
       <main className="pt-20 px-10 md:px-0 flex flex-col justify-between h-screen">
         <div>
-          <h1 className="text-center text-4xl font-bold mb-2 dark:text-white">Link Shortener</h1>
-          <p className="text-center text-gray-600 dark:text-gray-400">It shortens your links. That&apos;s it 🙃</p>
+          <h1 className="text-center text-4xl font-bold mb-2 dark:text-white">
+            {t("index.title")}
+          </h1>
+          <p className="text-center text-gray-600 dark:text-gray-400">
+            {t("index.subtitle")}
+          </p>
 
           <div className="flex items-center w-full mt-10">
             <div className="w-full md:max-w-2xl md:mx-auto">
-              {error && <Alert type="error" title="Error" message={error} />}
+              {error && (
+                <Alert
+                  type="error"
+                  title={t("index.alerts.error.title")}
+                  message={error}
+                />
+              )}
 
               {shorterUrl && (
-                <Alert type="success" title="Success" CustomMessage={renderSuccessAlertMessage} />
+                <Alert
+                  type="success"
+                  title={t("index.alerts.success.title")}
+                  CustomMessage={renderSuccessAlertMessage}
+                />
               )}
 
               <form className="md:flex md:flex-wrap md:justify-between">
@@ -90,7 +120,7 @@ const IndexPage: React.FC = () => {
                   <input
                     type="text"
                     name="url"
-                    placeholder="Type your URL here..."
+                    placeholder={t("index.inputs.url.placeholder")}
                     onChange={(e) => setUrl(e.target.value)}
                     disabled={isLoading}
                     className="bg-white md:mr-5 p-4 shadow rounded-lg focus:outline-none focus:ring focus:ring-opacity-20 focus:ring-blue-700 dark:bg-gray-800 dark:text-white dark:focus:ring-gray-200"
@@ -104,7 +134,7 @@ const IndexPage: React.FC = () => {
                     disabled={isLoading}
                     className="p-4 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors dark:bg-blue-800 dark:hover:bg-blue-600"
                   >
-                    Make it short!
+                    {t("index.actionButton")}
                   </button>
                 </div>
               </form>
@@ -113,22 +143,43 @@ const IndexPage: React.FC = () => {
         </div>
 
         <p className="mb-5 text-gray-600 text-center text-xs dark:text-gray-400">
-          Created with{' '}
-          <a href="https://nextjs.org/" target="_blank" rel="noreferrer" className="underline">
-            Next.js
-          </a>
-          ,{' '}
-          <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer" className="underline">
-            Tailwind
-          </a>{' '}
-          and{' '}
-          <a href="https://upstash.com/" target="_blank" rel="noreferrer" className="underline">
-            Upstash
-          </a>{' '}
-          by{' '}
-          <a href="https://matheus.me" target="_blank" rel="noreferrer" className="underline">
-            Matheus Calegaro
-          </a>
+          <Trans
+            i18nKey="index.footer"
+            components={{
+              nextJsLink: (
+                <a
+                  href="https://nextjs.org/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline"
+                />
+              ),
+              tailwindLink: (
+                <a
+                  href="https://tailwindcss.com/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline"
+                />
+              ),
+              upstashLink: (
+                <a
+                  href="https://upstash.com/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline"
+                />
+              ),
+              matheusLink: (
+                <a
+                  href="https://matheus.me"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline"
+                />
+              ),
+            }}
+          />
         </p>
       </main>
     </>
