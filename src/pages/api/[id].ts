@@ -1,11 +1,14 @@
 import Redis from 'ioredis';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { ErrorOutput } from '../../../typings';
+import type { ErrorOutput, GetOriginalUrlOutput } from '../../typings';
 
 const db = new Redis(process.env.REDIS_URL);
 
-const redirect = async (req: NextApiRequest, res: NextApiResponse<void | ErrorOutput>) => {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<GetOriginalUrlOutput | ErrorOutput>,
+) {
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -21,7 +24,5 @@ const redirect = async (req: NextApiRequest, res: NextApiResponse<void | ErrorOu
   }
 
   console.info('Original URL found, redirecting...');
-  return res.redirect(originalUrl);
-};
-
-export default redirect;
+  return res.status(200).json({ url: originalUrl });
+}
