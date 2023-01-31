@@ -2,34 +2,34 @@ const enUsTranslations = {
   translations: {
     index: {
       head: {
-        title: "MiniLinks - a simple link shortener by @mathcale",
+        title: 'MiniLinks - a simple link shortener by @mathcale',
       },
       alerts: {
         success: {
-          title: "Success",
-          message: "Your new URL is <url>{{shorterUrl}}</url>",
+          title: 'Success',
+          message: 'Your new URL is <url>{{shorterUrl}}</url>',
         },
         error: {
-          title: "Error",
+          title: 'Error',
           messages: {
-            invalidUrl: "Invalid URL!",
+            invalidUrl: 'Invalid URL!',
           },
         },
       },
       tooltips: {
-        copy: "Copy to clipboard",
-        copied: "Copied!",
+        copy: 'Copy to clipboard',
+        copied: 'Copied!',
       },
-      title: "Link Shortener",
-      subtitle: "It shortens your links. That&apos;s it 🙃",
+      title: 'Link Shortener',
+      subtitle: 'It shortens your links. That&apos;s it 🙃',
       inputs: {
         url: {
-          placeholder: "Type your URL here...",
+          placeholder: 'Type your URL here...',
         },
       },
-      actionButton: "Make it short!",
+      actionButton: 'Make it short!',
       footer:
-        "Created with <nextJsLink>Next.js</nextJsLink>, <tailwindLink>Tailwind</tailwindLink> and <upstashLink>Upstash</upstashLink> by <matheusLink>Matheus Calegaro</matheusLink>",
+        'Created with <nextJsLink>Next.js</nextJsLink>, <tailwindLink>Tailwind</tailwindLink> and <upstashLink>Upstash</upstashLink> by <matheusLink>Matheus Calegaro</matheusLink>',
     },
   },
 };
