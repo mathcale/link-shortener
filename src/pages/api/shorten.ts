@@ -33,7 +33,7 @@ const shorten = async (
   await db.hset(id, hashFields);
   console.info('URL successfully inserted on database!');
 
-  return res.status(201).json({ shorterUrl: `${process.env.REDIRECT_BASE_URL}/${id}` });
+  return res.status(201).json({ shorterUrl: `${process.env.BASE_URL}/${id}` });
 };
 
 export default shorten;
