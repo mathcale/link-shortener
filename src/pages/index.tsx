@@ -1,17 +1,17 @@
 import { useState, MouseEvent } from 'react';
 import Head from 'next/head';
-import ReactTooltip from 'react-tooltip';
+import { Tooltip as ReactTooltip } from 'react-tooltip';
 
-import { Alert } from "../components";
-import { UrlService } from "../services";
-import { Trans, useTranslation } from "react-i18next";
+import { Alert } from '../components';
+import { UrlService } from '../services';
+import { Trans, useTranslation } from 'react-i18next';
 
 const IndexPage: React.FC = () => {
   const { t } = useTranslation();
 
-  const INITIAL_TOOLTIP_TEXT = t("index.tooltips.copy");
+  const INITIAL_TOOLTIP_TEXT = t('index.tooltips.copy');
 
-  const [url, setUrl] = useState<string>("");
+  const [url, setUrl] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [shorterUrl, setShorterUrl] = useState<string | null>(null);
 
@@ -25,11 +25,10 @@ const IndexPage: React.FC = () => {
     setShorterUrl(null);
 
     // FIXME: move validation to its own service
-    const exp =
-      /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g;
+    const exp = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g;
 
-    if (url === "" || !exp.test(url)) {
-      setError(t("index.alerts.error.messages.invalidUrl"));
+    if (url === '' || !exp.test(url)) {
+      setError(t('index.alerts.error.messages.invalidUrl'));
       return;
     }
 
@@ -50,7 +49,7 @@ const IndexPage: React.FC = () => {
     e.preventDefault();
 
     await navigator.clipboard.writeText(shorterUrl);
-    setTooltipText(t("index.tooltips.copied"));
+    setTooltipText(t('index.tooltips.copied'));
 
     setTimeout(() => {
       setTooltipText(INITIAL_TOOLTIP_TEXT);
@@ -75,6 +74,7 @@ const IndexPage: React.FC = () => {
               />
             ),
           }}
+          tOptions={{ interpolation: { escapeValue: false } }}
         />
       </p>
 
@@ -85,32 +85,26 @@ const IndexPage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>{t("index.head.title")}</title>
+        <title>{t('index.head.title')}</title>
       </Head>
 
       <main className="pt-20 px-10 md:px-0 flex flex-col justify-between h-screen">
         <div>
           <h1 className="text-center text-4xl font-bold mb-2 dark:text-white">
-            {t("index.title")}
+            {t('index.title')}
           </h1>
-          <p className="text-center text-gray-600 dark:text-gray-400">
-            {t("index.subtitle")}
-          </p>
+          <p className="text-center text-gray-600 dark:text-gray-400">{t('index.subtitle')}</p>
 
           <div className="flex items-center w-full mt-10">
             <div className="w-full md:max-w-2xl md:mx-auto">
               {error && (
-                <Alert
-                  type="error"
-                  title={t("index.alerts.error.title")}
-                  message={error}
-                />
+                <Alert type="error" title={t('index.alerts.error.title')} message={error} />
               )}
 
               {shorterUrl && (
                 <Alert
                   type="success"
-                  title={t("index.alerts.success.title")}
+                  title={t('index.alerts.success.title')}
                   CustomMessage={renderSuccessAlertMessage}
                 />
               )}
@@ -120,7 +114,7 @@ const IndexPage: React.FC = () => {
                   <input
                     type="text"
                     name="url"
-                    placeholder={t("index.inputs.url.placeholder")}
+                    placeholder={t('index.inputs.url.placeholder')}
                     onChange={(e) => setUrl(e.target.value)}
                     disabled={isLoading}
                     className="bg-white md:mr-5 p-4 shadow rounded-lg focus:outline-none focus:ring focus:ring-opacity-20 focus:ring-blue-700 dark:bg-gray-800 dark:text-white dark:focus:ring-gray-200"
@@ -134,7 +128,7 @@ const IndexPage: React.FC = () => {
                     disabled={isLoading}
                     className="p-4 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors dark:bg-blue-800 dark:hover:bg-blue-600"
                   >
-                    {t("index.actionButton")}
+                    {t('index.actionButton')}
                   </button>
                 </div>
               </form>
