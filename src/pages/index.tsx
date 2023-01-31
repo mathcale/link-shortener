@@ -1,10 +1,10 @@
 import { useState, MouseEvent } from 'react';
 import Head from 'next/head';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
+import { Trans, useTranslation } from 'react-i18next';
 
 import { Alert } from '../components';
 import { UrlService } from '../services';
-import { Trans, useTranslation } from 'react-i18next';
 
 const IndexPage: React.FC = () => {
   const { t } = useTranslation();
