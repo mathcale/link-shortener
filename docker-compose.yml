@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  database:
+    image: redis:7.0.8-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel verbose
+    volumes:
+      - default:/data
+
+volumes:
+  default:
+    driver: local
